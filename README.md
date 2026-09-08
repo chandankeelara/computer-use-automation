@@ -8,6 +8,10 @@ ownership state machine, and multi-tenant overlays. Two target apps ship
 with the repo (`target_app/`, `target_app_v2/`) mimicking two different
 vendor products.
 
+📖 **Read next:**
+- [REPORT.md](REPORT.md) — design write-up (Architecture, Determinism, Multi-tenant, Escalation, Safety, Cuts)
+- [ARTIFACT.md](ARTIFACT.md) — deep reference for the capability artifact schema (identity, locators, outcomes, recoveries, overlays, structural invariants, how to author one)
+
 ## What's here
 
 ### Core loop
@@ -18,7 +22,8 @@ vendor products.
   `(name, version, target)`, `input_schema` / `output_schema`, ranked
   `outcomes` with typed extracts, `side_effects`, ordered `steps` with
   primary+fallback locator strategies, capability-level `recoveries`
-  (including `reauth`), `approval_state`.
+  (including `reauth`), `approval_state`. **Full schema reference:
+  [ARTIFACT.md](ARTIFACT.md).**
 - **Deterministic replay** (`cua/replay/engine.py`): resolves locators
   primary-first with per-tier verdicts, runs the recovery loop before
   escalating, distinguishes typed business outcomes from hard failures,
