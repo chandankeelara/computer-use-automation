@@ -1,7 +1,7 @@
 {
   "run_id": "eval__open_sub_account__acme__success",
   "kind": "replay",
-  "started_at": 1788846285.583451,
+  "started_at": 1788855036.8077502,
   "artifact": {
     "name": "open_sub_account",
     "version": "1.0.0",
@@ -11,12 +11,12 @@
     "member_id": "A-1042"
   },
   "operator_port": null,
-  "ended_at": 1788846286.282539,
-  "duration_s": 0.699,
+  "ended_at": 1788855037.4752793,
+  "duration_s": 0.668,
   "result": {
     "outcome": "SUCCESS",
     "outputs": {
-      "sub_account_id": "SA28188617"
+      "sub_account_id": "SA94567927"
     },
     "error": null,
     "tier_usage": {

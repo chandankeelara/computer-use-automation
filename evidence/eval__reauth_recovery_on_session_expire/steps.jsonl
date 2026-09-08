@@ -1,8 +1,8 @@
-{"step_id": "s1", "action": "navigate", "attempt": 1, "ok": true, "detail": "navigated to http://127.0.0.1:5000/?expire=1", "resolved_tier": -1, "tier_verdicts": [], "ms": 16}
+{"step_id": "s1", "action": "navigate", "attempt": 1, "ok": true, "detail": "navigated to http://127.0.0.1:5000/?expire=1", "resolved_tier": -1, "tier_verdicts": [], "ms": 15}
 {"step_id": "s2", "action": "type", "attempt": 1, "ok": true, "detail": "typed len=5", "resolved_tier": 0, "tier_verdicts": [{"tier": 0, "by": "label_relative", "verdict": "ok", "count": 1}], "ms": 10}
-{"step_id": "s3", "action": "click", "attempt": 1, "ok": true, "detail": "clicked", "resolved_tier": 0, "tier_verdicts": [{"tier": 0, "by": "role_name", "verdict": "ok", "count": 1}], "ms": 66}
+{"step_id": "s3", "action": "click", "attempt": 1, "ok": true, "detail": "clicked", "resolved_tier": 0, "tier_verdicts": [{"tier": 0, "by": "role_name", "verdict": "ok", "count": 1}], "ms": 56}
 {"recovery": {"name": "reauth_on_session_expire", "action": "reauth", "step_id": "s3", "restart_from_step_0": true, "ok": true}}
 {"reauth_restart": true, "remaining": 1, "trigger": "post_step"}
-{"step_id": "s1", "action": "navigate", "attempt": 1, "ok": true, "detail": "navigated to http://127.0.0.1:5000/?expire=1", "resolved_tier": -1, "tier_verdicts": [], "ms": 10}
-{"step_id": "s2", "action": "type", "attempt": 1, "ok": true, "detail": "typed len=5", "resolved_tier": 0, "tier_verdicts": [{"tier": 0, "by": "label_relative", "verdict": "ok", "count": 1}], "ms": 4}
-{"step_id": "s3", "action": "click", "attempt": 1, "ok": true, "detail": "clicked", "resolved_tier": 0, "tier_verdicts": [{"tier": 0, "by": "role_name", "verdict": "ok", "count": 1}], "ms": 52}
+{"step_id": "s1", "action": "navigate", "attempt": 1, "ok": true, "detail": "navigated to http://127.0.0.1:5000/?expire=1", "resolved_tier": -1, "tier_verdicts": [], "ms": 12}
+{"step_id": "s2", "action": "type", "attempt": 1, "ok": true, "detail": "typed len=5", "resolved_tier": 0, "tier_verdicts": [{"tier": 0, "by": "label_relative", "verdict": "ok", "count": 1}], "ms": 6}
+{"step_id": "s3", "action": "click", "attempt": 1, "ok": true, "detail": "clicked", "resolved_tier": 0, "tier_verdicts": [{"tier": 0, "by": "role_name", "verdict": "ok", "count": 1}], "ms": 50}

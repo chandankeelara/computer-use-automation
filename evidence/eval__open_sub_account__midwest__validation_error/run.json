@@ -1,7 +1,7 @@
 {
   "run_id": "eval__open_sub_account__midwest__validation_error",
   "kind": "replay",
-  "started_at": 1788846284.1359754,
+  "started_at": 1788855035.606691,
   "artifact": {
     "name": "open_sub_account",
     "version": "1.0.0",
@@ -11,8 +11,8 @@
     "member_id": "00000"
   },
   "operator_port": null,
-  "ended_at": 1788846284.7599456,
-  "duration_s": 0.624,
+  "ended_at": 1788855036.101302,
+  "duration_s": 0.495,
   "result": {
     "outcome": "VALIDATION_ERROR",
     "outputs": null,

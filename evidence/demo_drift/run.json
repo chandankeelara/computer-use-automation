@@ -1,0 +1,40 @@
+{
+  "run_id": "demo_drift",
+  "kind": "replay",
+  "started_at": 1788855118.9988313,
+  "artifact": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_federal"
+  },
+  "inputs": {
+    "member_id": "12345"
+  },
+  "operator_port": null,
+  "ended_at": 1788855119.6014555,
+  "duration_s": 0.603,
+  "result": {
+    "outcome": "ESCALATED_UNRESOLVED",
+    "outputs": null,
+    "error": {
+      "step": "s4",
+      "expected": "step_succeeds",
+      "observed": "locator all-miss (verdicts=[{'tier': 0, 'by': 'role_name', 'verdict': 'miss', 'count': 0}, {'tier': 1, 'by': 'css', 'verdict': 'miss', 'count': 0}])"
+    },
+    "tier_usage": {
+      "s2": 2,
+      "s3": 0
+    },
+    "recoveries_applied": [],
+    "resolved_via_handoff": false,
+    "control_transitions": [
+      {
+        "ts": 1788855119.5964353,
+        "from": "agent",
+        "to": "paused",
+        "reason": "locator all-miss or action error: locator all-miss (verdicts=[{'tier': 0, 'by': 'role_name', 'verdict': 'miss', 'count': 0}, {'tier': 1, 'by': 'css', 'verdict': 'miss', 'count': 0}])",
+        "actor": "system"
+      }
+    ]
+  }
+}

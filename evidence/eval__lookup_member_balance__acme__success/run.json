@@ -1,7 +1,7 @@
 {
   "run_id": "eval__lookup_member_balance__acme__success",
   "kind": "replay",
-  "started_at": 1788846289.0830789,
+  "started_at": 1788855039.9246697,
   "artifact": {
     "name": "lookup_member_balance",
     "version": "1.0.0",
@@ -11,8 +11,8 @@
     "member_id": "A-1042"
   },
   "operator_port": null,
-  "ended_at": 1788846289.6828089,
-  "duration_s": 0.6,
+  "ended_at": 1788855040.461406,
+  "duration_s": 0.538,
   "result": {
     "outcome": "SUCCESS",
     "outputs": {

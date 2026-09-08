@@ -1,7 +1,7 @@
 {
   "run_id": "eval__open_sub_account__midwest__success",
   "kind": "replay",
-  "started_at": 1788846282.0577204,
+  "started_at": 1788855033.2369015,
   "artifact": {
     "name": "open_sub_account",
     "version": "1.0.0",
@@ -11,12 +11,12 @@
     "member_id": "12345"
   },
   "operator_port": null,
-  "ended_at": 1788846282.750081,
-  "duration_s": 0.692,
+  "ended_at": 1788855034.375529,
+  "duration_s": 1.139,
   "result": {
     "outcome": "SUCCESS",
     "outputs": {
-      "sub_account_id": "SA19276696"
+      "sub_account_id": "SA73460084"
     },
     "error": null,
     "tier_usage": {

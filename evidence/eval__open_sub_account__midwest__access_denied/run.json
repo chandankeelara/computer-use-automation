@@ -1,7 +1,7 @@
 {
   "run_id": "eval__open_sub_account__midwest__access_denied",
   "kind": "replay",
-  "started_at": 1788846283.4665089,
+  "started_at": 1788855035.050361,
   "artifact": {
     "name": "open_sub_account",
     "version": "1.0.0",
@@ -11,8 +11,8 @@
     "member_id": "55555"
   },
   "operator_port": null,
-  "ended_at": 1788846284.058454,
-  "duration_s": 0.592,
+  "ended_at": 1788855035.5540419,
+  "duration_s": 0.504,
   "result": {
     "outcome": "ACCESS_DENIED",
     "outputs": null,

@@ -1,0 +1,111 @@
+{
+  "role": null,
+  "name": null,
+  "value": null,
+  "children": [
+    {
+      "role": null,
+      "name": null,
+      "value": null,
+      "children": [
+        {
+          "role": "table",
+          "name": null,
+          "value": null,
+          "children": [
+            {
+              "role": null,
+              "name": null,
+              "value": null,
+              "children": [
+                {
+                  "role": "row",
+                  "name": null,
+                  "value": null,
+                  "children": [
+                    {
+                      "role": "cell",
+                      "name": null,
+                      "value": null,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "role": "row",
+                  "name": null,
+                  "value": null,
+                  "children": [
+                    {
+                      "role": "cell",
+                      "name": null,
+                      "value": null,
+                      "children": []
+                    },
+                    {
+                      "role": "cell",
+                      "name": null,
+                      "value": null,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "role": "row",
+                  "name": null,
+                  "value": null,
+                  "children": [
+                    {
+                      "role": "cell",
+                      "name": null,
+                      "value": null,
+                      "children": []
+                    },
+                    {
+                      "role": "cell",
+                      "name": null,
+                      "value": null,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "role": "row",
+                  "name": null,
+                  "value": null,
+                  "children": [
+                    {
+                      "role": "cell",
+                      "name": null,
+                      "value": null,
+                      "children": []
+                    },
+                    {
+                      "role": "cell",
+                      "name": null,
+                      "value": null,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "form",
+          "name": null,
+          "value": null,
+          "children": [
+            {
+              "role": "button",
+              "name": "Open Sub-Account",
+              "value": "Open Sub-Account",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

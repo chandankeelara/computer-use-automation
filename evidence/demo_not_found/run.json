@@ -1,0 +1,28 @@
+{
+  "run_id": "demo_not_found",
+  "kind": "replay",
+  "started_at": 1788855071.1601505,
+  "artifact": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_federal"
+  },
+  "inputs": {
+    "member_id": "99999"
+  },
+  "operator_port": null,
+  "ended_at": 1788855071.6660137,
+  "duration_s": 0.506,
+  "result": {
+    "outcome": "MEMBER_NOT_FOUND",
+    "outputs": null,
+    "error": null,
+    "tier_usage": {
+      "s2": 0,
+      "s3": 0
+    },
+    "recoveries_applied": [],
+    "resolved_via_handoff": false,
+    "control_transitions": []
+  }
+}

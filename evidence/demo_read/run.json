@@ -1,0 +1,30 @@
+{
+  "run_id": "demo_read",
+  "kind": "replay",
+  "started_at": 1788855100.6536162,
+  "artifact": {
+    "name": "lookup_member_balance",
+    "version": "1.0.0",
+    "target": "midwest_federal"
+  },
+  "inputs": {
+    "member_id": "12345"
+  },
+  "operator_port": null,
+  "ended_at": 1788855101.1703248,
+  "duration_s": 0.517,
+  "result": {
+    "outcome": "SUCCESS",
+    "outputs": {
+      "savings_balance": "1,234.56"
+    },
+    "error": null,
+    "tier_usage": {
+      "s2": 0,
+      "s3": 0
+    },
+    "recoveries_applied": [],
+    "resolved_via_handoff": false,
+    "control_transitions": []
+  }
+}

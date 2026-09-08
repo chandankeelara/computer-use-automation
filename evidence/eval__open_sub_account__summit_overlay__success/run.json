@@ -1,7 +1,7 @@
 {
   "run_id": "eval__open_sub_account__summit_overlay__success",
   "kind": "replay",
-  "started_at": 1788846284.827081,
+  "started_at": 1788855036.163611,
   "artifact": {
     "name": "open_sub_account",
     "version": "1.0.0",
@@ -11,12 +11,12 @@
     "member_id": "12345"
   },
   "operator_port": null,
-  "ended_at": 1788846285.517467,
-  "duration_s": 0.69,
+  "ended_at": 1788855036.7572274,
+  "duration_s": 0.594,
   "result": {
     "outcome": "SUCCESS",
     "outputs": {
-      "sub_account_id": "SA24457032"
+      "sub_account_id": "SA94190614"
     },
     "error": null,
     "tier_usage": {

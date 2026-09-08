@@ -1,0 +1,13 @@
+{
+  "capability": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_federal"
+  },
+  "step_id": "s4",
+  "reason": "locator all-miss or action error: locator all-miss (verdicts=[{'tier': 0, 'by': 'role_name', 'verdict': 'miss', 'count': 0}, {'tier': 1, 'by': 'css', 'verdict': 'miss', 'count': 0}])",
+  "observed": "locator all-miss (verdicts=[{'tier': 0, 'by': 'role_name', 'verdict': 'miss', 'count': 0}, {'tier': 1, 'by': 'css', 'verdict': 'miss', 'count': 0}])",
+  "current_url": "http://127.0.0.1:5000/member/12345",
+  "screenshot_path": "evidence\\demo_drift\\screenshots\\step_5.png",
+  "ax_snapshot_path": "evidence\\demo_drift\\ax\\step_5.json"
+}

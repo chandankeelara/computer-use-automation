@@ -395,9 +395,13 @@ def replay_artifact(
                     }
                     return _finalize(result_container)
                 result_container.resolved_via_handoff = True
-                # Operator may have executed the action themselves; verify.
-                # If checkpoint / expectation holds, skip to next step.
-                if _check_expectation(surface, step) or _capability_checkpoint_holds(surface, artifact):
+                # Approval means "run the step automatically". If the
+                # operator already executed it themselves during handoff
+                # (evidenced by the capability checkpoint now holding),
+                # skip. Otherwise fall through and let the engine drive
+                # the step. Semantic: 'approve' = go ahead; 'decline' =
+                # ESCALATED_UNRESOLVED (handled above via not-resumed).
+                if _capability_checkpoint_holds(surface, artifact):
                     step_index += 1
                     continue
 

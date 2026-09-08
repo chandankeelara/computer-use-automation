@@ -6,8 +6,8 @@
     "SUCCESS": 5
   },
   "duration_s": {
-    "mean": 0.76,
-    "p95": 0.77
+    "mean": 0.61,
+    "p95": 0.63
   },
   "tier_usage_per_step": {
     "s2": {
@@ -24,27 +24,27 @@
     {
       "run": 1,
       "outcome": "SUCCESS",
-      "duration_s": 0.77
+      "duration_s": 0.66
     },
     {
       "run": 2,
       "outcome": "SUCCESS",
-      "duration_s": 0.78
+      "duration_s": 0.63
     },
     {
       "run": 3,
       "outcome": "SUCCESS",
-      "duration_s": 0.76
+      "duration_s": 0.59
     },
     {
       "run": 4,
       "outcome": "SUCCESS",
-      "duration_s": 0.75
+      "duration_s": 0.59
     },
     {
       "run": 5,
       "outcome": "SUCCESS",
-      "duration_s": 0.74
+      "duration_s": 0.6
     }
   ]
 }

@@ -1,0 +1,53 @@
+{
+  "run_id": "demo_hitl_operator",
+  "kind": "replay",
+  "started_at": 1788856170.0259967,
+  "artifact": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_federal"
+  },
+  "inputs": {
+    "member_id": "12345"
+  },
+  "operator_port": 8765,
+  "ended_at": 1788856183.4301054,
+  "duration_s": 13.405,
+  "result": {
+    "outcome": "SUCCESS",
+    "outputs": {
+      "sub_account_id": "SA10525426"
+    },
+    "error": null,
+    "tier_usage": {
+      "s2": 0,
+      "s3": 0,
+      "s4": 0
+    },
+    "recoveries_applied": [],
+    "resolved_via_handoff": true,
+    "control_transitions": [
+      {
+        "ts": 1788856171.44331,
+        "from": "agent",
+        "to": "paused",
+        "reason": "risky action requires approval: click is risky",
+        "actor": "system"
+      },
+      {
+        "ts": 1788856183.2564669,
+        "from": "paused",
+        "to": "human",
+        "reason": "operator took control",
+        "actor": "operator"
+      },
+      {
+        "ts": 1788856183.3444934,
+        "from": "human",
+        "to": "agent",
+        "reason": "forced resume (0 recorded)",
+        "actor": "operator"
+      }
+    ]
+  }
+}

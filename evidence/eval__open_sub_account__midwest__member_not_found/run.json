@@ -1,7 +1,7 @@
 {
   "run_id": "eval__open_sub_account__midwest__member_not_found",
   "kind": "replay",
-  "started_at": 1788846282.8222737,
+  "started_at": 1788855034.4322808,
   "artifact": {
     "name": "open_sub_account",
     "version": "1.0.0",
@@ -11,8 +11,8 @@
     "member_id": "99999"
   },
   "operator_port": null,
-  "ended_at": 1788846283.4095469,
-  "duration_s": 0.587,
+  "ended_at": 1788855034.9870012,
+  "duration_s": 0.555,
   "result": {
     "outcome": "MEMBER_NOT_FOUND",
     "outputs": null,

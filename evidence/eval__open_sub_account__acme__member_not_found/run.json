@@ -1,7 +1,7 @@
 {
   "run_id": "eval__open_sub_account__acme__member_not_found",
   "kind": "replay",
-  "started_at": 1788846286.3421855,
+  "started_at": 1788855037.5369916,
   "artifact": {
     "name": "open_sub_account",
     "version": "1.0.0",
@@ -11,8 +11,8 @@
     "member_id": "A-XXXX"
   },
   "operator_port": null,
-  "ended_at": 1788846286.943035,
-  "duration_s": 0.601,
+  "ended_at": 1788855038.1526704,
+  "duration_s": 0.616,
   "result": {
     "outcome": "MEMBER_NOT_FOUND",
     "outputs": null,

@@ -1,7 +1,7 @@
 {
   "run_id": "stability_3_of_5",
   "kind": "replay",
-  "started_at": 1788842167.3446686,
+  "started_at": 1788855141.1870239,
   "artifact": {
     "name": "open_sub_account",
     "version": "1.0.0",
@@ -11,12 +11,12 @@
     "member_id": "12345"
   },
   "operator_port": null,
-  "ended_at": 1788842168.0479987,
-  "duration_s": 0.703,
+  "ended_at": 1788855141.7306027,
+  "duration_s": 0.544,
   "result": {
     "outcome": "SUCCESS",
     "outputs": {
-      "sub_account_id": "SA63992596"
+      "sub_account_id": "SA49845025"
     },
     "error": null,
     "tier_usage": {
