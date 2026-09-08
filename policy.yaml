@@ -1,0 +1,15 @@
+allowed_domains:
+  - "127.0.0.1:5000"
+  - "localhost:5000"
+allowed_actions:
+  - navigate
+  - click
+  - type
+  - read
+  - press
+  - assert
+risky_actions_require_approval: true
+# Actions that mutate state on the target system; discovery marks these risky.
+risky_action_kinds:
+  - click_submit_open
+  - click_submit_transfer

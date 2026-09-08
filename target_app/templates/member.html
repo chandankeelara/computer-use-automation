@@ -1,0 +1,13 @@
+{% extends "_base.html" %}
+{% block content %}
+<table class="cls_data">
+  <tr><th colspan="2">Member Details</th></tr>
+  <tr><td>Member ID</td><td>{{ member_id }}</td></tr>
+  <tr><td>Name</td><td>{{ member.name }}</td></tr>
+  <tr><td>Savings Balance</td><td>${{ member.savings_balance }}</td></tr>
+</table>
+<br>
+<form method="post" action="/member/{{ member_id }}/open">
+  <input type="submit" class="cls_btn" value="Open Sub-Account">
+</form>
+{% endblock %}

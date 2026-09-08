@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+<title>Midwest Federal Servicing Console</title>
+<style>
+body { font-family: Verdana, sans-serif; font-size: 12px; background: #eee; margin: 0; }
+.cls_hdr { background: #003366; color: #fff; padding: 6px 10px; }
+.cls_wrap { padding: 10px; }
+table { border-collapse: collapse; }
+table.cls_frm td { padding: 3px 6px; }
+table.cls_data { border: 1px solid #888; }
+table.cls_data td, table.cls_data th { border: 1px solid #bbb; padding: 4px 8px; background: #fff; }
+input[type=text], input[type=password] { border: 1px solid #999; padding: 2px 4px; font-family: inherit; }
+.cls_btn { background: #ddd; border: 1px outset #aaa; padding: 2px 10px; font-family: inherit; }
+.cls_err { color: #a00; }
+</style>
+</head>
+<body>
+<div class="cls_hdr">Midwest Federal Servicing Console &nbsp;|&nbsp; v3.11.7</div>
+<div class="cls_wrap">
+{% block content %}{% endblock %}
+</div>
+</body>
+</html>

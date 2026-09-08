@@ -1,0 +1,11 @@
+{% extends "_base.html" %}
+{% block content %}
+<table class="cls_data">
+  <tr><th colspan="2">Sub-Account Opened</th></tr>
+  <tr><td>Member</td><td>{{ member.name }} ({{ member_id }})</td></tr>
+  <tr><td>New Sub-Account #</td><td>{{ sub_id }}</td></tr>
+  <tr><td>Status</td><td>Confirmed</td></tr>
+</table>
+<br>
+<a href="/">Back to Member Lookup</a>
+{% endblock %}

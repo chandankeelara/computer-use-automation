@@ -1,0 +1,19 @@
+{
+  "run_id": "replay_99999_9905b0",
+  "kind": "replay",
+  "started_at": 1788519115.0032706,
+  "artifact": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_federal"
+  },
+  "inputs": {
+    "member_id": "99999"
+  },
+  "ended_at": 1788519115.916761,
+  "duration_s": 0.913,
+  "result": {
+    "outcome": "MEMBER_NOT_FOUND",
+    "outputs": {}
+  }
+}

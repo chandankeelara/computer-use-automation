@@ -1,0 +1,9 @@
+{"step": 1, "tool": "navigate", "ok": true, "detail": "navigated to http://127.0.0.1:5000/", "resolved_tier": -1}
+{"step": 2, "tool": "get_snapshot", "url": "http://127.0.0.1:5000/", "title": "Midwest Federal Servicing Console", "screenshot": "evidence\\discovery_12345\\screenshots\\snap_1.png"}
+{"step": 3, "tool": "type", "ok": true, "detail": "typed len=5", "resolved_tier": 0}
+{"step": 4, "tool": "click", "ok": true, "detail": "clicked", "resolved_tier": 0}
+{"step": 5, "tool": "get_snapshot", "url": "http://127.0.0.1:5000/member/12345", "title": "Midwest Federal Servicing Console", "screenshot": "evidence\\discovery_12345\\screenshots\\snap_2.png"}
+{"step": 6, "tool": "click", "ok": true, "detail": "clicked", "resolved_tier": 0}
+{"step": 7, "tool": "get_snapshot", "url": "http://127.0.0.1:5000/member/12345/confirm/SA05687949", "title": "Midwest Federal Servicing Console", "screenshot": "evidence\\discovery_12345\\screenshots\\snap_3.png"}
+{"step": 8, "tool": "mark_output", "args": {"name": "sub_account_id", "from": "url", "regex": "/confirm/(?P<sub_account_id>SA\\d+)"}}
+{"step": 9, "tool": "finish", "args": {"outcome_code": "SUCCESS", "checkpoint_url_pattern": "^.*/member/\\d+/confirm/SA\\d+$"}}

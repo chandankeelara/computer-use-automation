@@ -1,0 +1,165 @@
+{
+  "id": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_federal"
+  },
+  "title": "Open sub-account for a member",
+  "description": "Look up a member by ID and open a new sub-account. Returns the new sub-account number.",
+  "input_schema": {
+    "type": "object",
+    "required": [
+      "member_id"
+    ],
+    "properties": {
+      "member_id": {
+        "type": "string",
+        "example": "12345"
+      }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "sub_account_id": {
+        "type": "string",
+        "pattern": "^SA\\d+$"
+      }
+    },
+    "required": [
+      "sub_account_id"
+    ]
+  },
+  "outcomes": [
+    {
+      "code": "SUCCESS",
+      "terminal": true,
+      "detected_by": {
+        "kind": "url_pattern",
+        "pattern": "^.*/member/\\d+/confirm/SA\\d+$",
+        "text": null,
+        "locator": null
+      },
+      "extracts": [
+        {
+          "name": "sub_account_id",
+          "from": "url",
+          "locator": null,
+          "url_pattern": null,
+          "regex": "/confirm/(?P<sub_account_id>SA\\d+)"
+        }
+      ]
+    },
+    {
+      "code": "MEMBER_NOT_FOUND",
+      "terminal": true,
+      "detected_by": {
+        "kind": "text_present",
+        "pattern": null,
+        "text": "No member found",
+        "locator": null
+      },
+      "extracts": []
+    }
+  ],
+  "side_effects": [
+    {
+      "kind": "creates_sub_account",
+      "reversible": false
+    }
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "action": "navigate",
+      "target": null,
+      "value": null,
+      "url": "http://127.0.0.1:5000/",
+      "expect": null,
+      "risk": "safe",
+      "notes": "Load initial page."
+    },
+    {
+      "id": "s2",
+      "action": "type",
+      "target": {
+        "primary": {
+          "by": "label_relative",
+          "anchor": "Member ID",
+          "direction": "next_input"
+        },
+        "fallbacks": [
+          {
+            "by": "css",
+            "selector": "input[name='q']"
+          },
+          {
+            "by": "role_name",
+            "role": "textbox"
+          }
+        ]
+      },
+      "value": "{{member_id}}",
+      "url": null,
+      "expect": null,
+      "risk": "safe",
+      "notes": "Enter member ID into lookup form."
+    },
+    {
+      "id": "s3",
+      "action": "click",
+      "target": {
+        "primary": {
+          "by": "role_name",
+          "role": "button",
+          "name": "Search"
+        },
+        "fallbacks": [
+          {
+            "by": "css",
+            "selector": "input[type=submit][value='Search']"
+          }
+        ]
+      },
+      "value": null,
+      "url": null,
+      "expect": null,
+      "risk": "safe",
+      "notes": "Submit member lookup."
+    },
+    {
+      "id": "s4",
+      "action": "click",
+      "target": {
+        "primary": {
+          "by": "role_name",
+          "role": "button",
+          "name": "Open Sub-Account"
+        },
+        "fallbacks": [
+          {
+            "by": "css",
+            "selector": "input[type=submit][value='Open Sub-Account']"
+          }
+        ]
+      },
+      "value": null,
+      "url": null,
+      "expect": null,
+      "risk": "risky",
+      "notes": "Open a new sub-account. IRREVERSIBLE."
+    }
+  ],
+  "checkpoint": {
+    "kind": "url_pattern",
+    "pattern": "^.*/member/\\d+/confirm/SA\\d+$",
+    "text": null
+  },
+  "provenance": {
+    "goal": "Open a sub-account for member 12345",
+    "model": "mock-llm@1",
+    "recorded_at": "2026-09-04T10:51:52.717725Z",
+    "run_id": "discovery_12345",
+    "target_url": "http://127.0.0.1:5000"
+  }
+}
