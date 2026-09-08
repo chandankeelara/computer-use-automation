@@ -74,6 +74,16 @@ class Step(BaseModel):
     url: Optional[str] = None
     expect: Optional[Expectation] = None
     risk: Literal["safe", "risky"] = "safe"
+    # human_required: this step is by design done by a human on every
+    # run (canonical example: OTP / 2FA entry — only the human has the
+    # code). Distinct from `risk: risky`, which is a policy gate that
+    # `--auto-approve-risky` can bypass. `human_required` is NOT
+    # bypassable — the engine will always escalate before this step,
+    # and after the operator resumes it will NOT execute the step
+    # itself (the human already did it in the paused tab). The resume
+    # gate additionally requires human_actions_recorded > 0 unless
+    # force=true (audited).
+    human_required: bool = False
     notes: str = ""
 
 

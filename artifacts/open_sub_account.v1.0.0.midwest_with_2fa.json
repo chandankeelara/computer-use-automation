@@ -1,0 +1,74 @@
+{
+  "id": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_with_2fa"
+  },
+  "title": "Open sub-account requiring 2FA at the risky step",
+  "description": "Demonstrates human_required=true. The final Open Sub-Account step (irreversible) is declared as human_required — the operator must physically click it in the paused tab on every single run. There is NO --auto-approve-risky bypass for human_required steps; that flag is a policy override for `risky` steps, not for steps whose semantics REQUIRE a human every time (2FA / OTP / dual-control).",
+  "input_schema": {
+    "type": "object",
+    "required": ["member_id"],
+    "properties": { "member_id": { "type": "string", "example": "12345" } }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": { "sub_account_id": { "type": "string", "pattern": "^SA\\d+$" } },
+    "required": ["sub_account_id"]
+  },
+  "outcomes": [
+    {
+      "code": "SUCCESS",
+      "terminal": true,
+      "detected_by": { "kind": "url_pattern", "pattern": "^.*/member/\\d+/confirm/SA\\d+$" },
+      "extracts": [ { "name": "sub_account_id", "from": "url", "regex": "/confirm/(?P<sub_account_id>SA\\d+)" } ]
+    },
+    { "code": "MEMBER_NOT_FOUND", "terminal": true, "detected_by": { "kind": "text_present", "text": "No member found" }, "extracts": [] }
+  ],
+  "side_effects": [ { "kind": "creates_sub_account", "reversible": false } ],
+  "steps": [
+    { "id": "s1", "action": "navigate", "url": "http://127.0.0.1:5000/", "risk": "safe" },
+    {
+      "id": "s2",
+      "action": "type",
+      "target": {
+        "primary": { "by": "label_relative", "anchor": "Member ID", "direction": "next_input" },
+        "fallbacks": [ { "by": "css", "selector": "input[name='q']" } ]
+      },
+      "value": "{{member_id}}",
+      "risk": "safe"
+    },
+    {
+      "id": "s3",
+      "action": "click",
+      "target": {
+        "primary": { "by": "role_name", "role": "button", "name": "Search" },
+        "fallbacks": [ { "by": "css", "selector": "input[type=submit][value='Search']" } ]
+      },
+      "risk": "safe"
+    },
+    {
+      "id": "s4",
+      "action": "click",
+      "target": {
+        "primary": { "by": "role_name", "role": "button", "name": "Open Sub-Account" },
+        "fallbacks": [ { "by": "css", "selector": "input[type=submit][value='Open Sub-Account']" } ]
+      },
+      "risk": "risky",
+      "human_required": true,
+      "notes": "IRREVERSIBLE + human_required. Operator must click this personally on every run — no --auto-approve-risky bypass. Canonical 2FA/OTP/dual-control pattern."
+    }
+  ],
+  "checkpoint": { "kind": "url_pattern", "pattern": "^.*/member/\\d+/confirm/SA\\d+$" },
+  "recoveries": [],
+  "approval_state": "approved",
+  "approved_by": "chandan",
+  "approved_at": "2026-09-08T00:00:00Z",
+  "provenance": {
+    "goal": "Open sub-account with mandatory human confirmation",
+    "model": "author-annotated@1",
+    "recorded_at": "2026-09-08T00:00:00Z",
+    "run_id": "authored_2fa_v1",
+    "target_url": "http://127.0.0.1:5000"
+  }
+}

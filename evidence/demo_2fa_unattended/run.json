@@ -1,0 +1,40 @@
+{
+  "run_id": "demo_2fa_unattended",
+  "kind": "replay",
+  "started_at": 1788857136.8268137,
+  "artifact": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_with_2fa"
+  },
+  "inputs": {
+    "member_id": "12345"
+  },
+  "operator_port": null,
+  "ended_at": 1788857137.6013346,
+  "duration_s": 0.775,
+  "result": {
+    "outcome": "ESCALATED_UNRESOLVED",
+    "outputs": null,
+    "error": {
+      "step": "s4",
+      "expected": "human completes the step",
+      "observed": "no_response_or_declined"
+    },
+    "tier_usage": {
+      "s2": 0,
+      "s3": 0
+    },
+    "recoveries_applied": [],
+    "resolved_via_handoff": false,
+    "control_transitions": [
+      {
+        "ts": 1788857137.5933127,
+        "from": "agent",
+        "to": "paused",
+        "reason": "step is human_required-by-design (e.g. 2FA / OTP)",
+        "actor": "system"
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "capability": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_with_2fa"
+  },
+  "step_id": "s4",
+  "reason": "step is human_required-by-design (e.g. 2FA / OTP)",
+  "observed": "awaiting human input on the paused tab",
+  "current_url": "http://127.0.0.1:5000/member/12345",
+  "screenshot_path": "evidence\\demo_2fa_operator\\screenshots\\step_5.png",
+  "ax_snapshot_path": "evidence\\demo_2fa_operator\\ax\\step_5.json"
+}

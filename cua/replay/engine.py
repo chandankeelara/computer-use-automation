@@ -379,6 +379,32 @@ def replay_artifact(
                     "observed": decision.reason,
                 }
                 return _finalize(result_container)
+            # Trigger (d): step is human_required-by-design (2FA / OTP).
+            # Always escalates, non-bypassable — `--auto-approve-risky`
+            # is a policy override for `risky` steps only, not for steps
+            # whose semantics REQUIRE a human on every run. After the
+            # operator finishes (verified via human_actions_recorded>0
+            # in the resume gate), we DO NOT execute the step ourselves
+            # — the human already did it in the paused tab.
+            if step.human_required:
+                resumed = _escalate(
+                    step.id,
+                    "step is human_required-by-design (e.g. 2FA / OTP)",
+                    obs="awaiting human input on the paused tab",
+                )
+                if not resumed:
+                    result_container.outcome = "ESCALATED_UNRESOLVED"
+                    result_container.error = {
+                        "step": step.id,
+                        "expected": "human completes the step",
+                        "observed": "no_response_or_declined",
+                    }
+                    return _finalize(result_container)
+                result_container.resolved_via_handoff = True
+                evidence.log_step({**base_entry, "human_completed": True})
+                step_index += 1
+                continue
+
             if isinstance(decision, RequiresApproval) and not auto_approve_risky:
                 # Trigger (c): risky step gate.
                 resumed = _escalate(

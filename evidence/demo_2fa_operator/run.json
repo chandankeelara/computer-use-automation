@@ -1,0 +1,54 @@
+{
+  "run_id": "demo_2fa_operator",
+  "kind": "replay",
+  "started_at": 1788857146.1435814,
+  "artifact": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_with_2fa"
+  },
+  "inputs": {
+    "member_id": "12345"
+  },
+  "operator_port": 8765,
+  "ended_at": 1788857166.838062,
+  "duration_s": 20.695,
+  "result": {
+    "outcome": null,
+    "outputs": null,
+    "error": {
+      "step": "<terminal>",
+      "expected": "any declared outcome",
+      "observed": "http://127.0.0.1:5000/member/12345"
+    },
+    "tier_usage": {
+      "s2": 0,
+      "s3": 0
+    },
+    "recoveries_applied": [],
+    "resolved_via_handoff": true,
+    "control_transitions": [
+      {
+        "ts": 1788857147.6418228,
+        "from": "agent",
+        "to": "paused",
+        "reason": "step is human_required-by-design (e.g. 2FA / OTP)",
+        "actor": "system"
+      },
+      {
+        "ts": 1788857165.9179978,
+        "from": "paused",
+        "to": "human",
+        "reason": "operator took control",
+        "actor": "operator"
+      },
+      {
+        "ts": 1788857166.826545,
+        "from": "human",
+        "to": "agent",
+        "reason": "forced resume (0 recorded)",
+        "actor": "operator"
+      }
+    ]
+  }
+}
