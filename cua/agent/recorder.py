@@ -22,6 +22,8 @@ from ..artifact.schema import (
     LocatorStrategy,
     Outcome,
     Provenance,
+    Recovery,
+    RecoveryTrigger,
     SideEffect,
     Step,
 )
@@ -127,16 +129,25 @@ class Recorder:
                 detected_by=DetectedBy(kind="url_pattern", pattern=self._checkpoint_pattern),
                 extracts=self._extracts,
             ),
-            # A declared business outcome — hand-added because discovery only
-            # walked the success path. In a real system this would also be
-            # discovered (via a second run against a non-existent member) or
-            # authored by a domain SME.
+            # Declared business outcomes — hand-added because discovery only
+            # walked the success path. In a real system these would also be
+            # discovered (via a second run against a non-existent / restricted
+            # / malformed member) or authored by a domain SME. Keeping them as
+            # data means adding a new outcome is a schema change, not code.
             Outcome(
                 code="MEMBER_NOT_FOUND",
                 terminal=True,
-                detected_by=DetectedBy(
-                    kind="text_present", text='No member found'
-                ),
+                detected_by=DetectedBy(kind="text_present", text="No member found"),
+            ),
+            Outcome(
+                code="ACCESS_DENIED",
+                terminal=True,
+                detected_by=DetectedBy(kind="text_present", text="Access denied for member"),
+            ),
+            Outcome(
+                code="VALIDATION_ERROR",
+                terminal=True,
+                detected_by=DetectedBy(kind="text_present", text="Invalid input for"),
             ),
         ]
         side_effects: list[SideEffect] = []
@@ -149,6 +160,21 @@ class Recorder:
             if self._checkpoint_pattern
             else None
         )
+        recoveries = [
+            Recovery(
+                name="dismiss_session_refresh_flap",
+                trigger=RecoveryTrigger(
+                    kind="text_present", text="Session refresh recommended"
+                ),
+                action="dismiss",
+                dismiss_locator=LocatorStrategy(
+                    primary={"by": "css", "selector": "#flapModal button"}
+                ),
+                wait_ms=0,
+                max_attempts=2,
+                notes="Auto-dismiss the intermittent session refresh interstitial.",
+            )
+        ]
         return Artifact(
             id=ArtifactId(name=self._name, version=self._version, target=self._target_name),
             title="Open sub-account for a member",
@@ -162,6 +188,7 @@ class Recorder:
             side_effects=side_effects,
             steps=self._steps,
             checkpoint=checkpoint,
+            recoveries=recoveries,
             provenance=Provenance(
                 goal=self._goal,
                 model=self._model,

@@ -1,12 +1,12 @@
 {
   "run_id": "discovery_12345",
   "kind": "discovery",
-  "started_at": 1788519111.651073,
+  "started_at": 1788842086.5257967,
   "goal": "Open a sub-account for member 12345",
   "target_url": "http://127.0.0.1:5000",
   "use_mock": true,
-  "ended_at": 1788519112.7252412,
-  "duration_s": 1.074,
+  "ended_at": 1788842092.0244393,
+  "duration_s": 5.499,
   "result": {
     "ok": true,
     "steps": 4

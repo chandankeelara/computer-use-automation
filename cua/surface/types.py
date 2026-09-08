@@ -49,3 +49,8 @@ class ExecutionResult:
     read_value: Optional[str] = None
     # Which fallback tier resolved (0=primary, 1..=fallbacks, -1=none/N/A)
     resolved_tier: int = -1
+    # Per-tier verdicts collected during resolution. Elements look like
+    # {"tier": 0, "by": "role_name", "verdict": "ok|miss|ambiguous", "count": N}.
+    # Load-bearing for evidence: "primary matched 3 things so we rejected
+    # it and used the CSS fallback" is very different from "primary missed."
+    tier_verdicts: list[dict] = field(default_factory=list)

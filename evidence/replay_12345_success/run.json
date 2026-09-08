@@ -1,0 +1,31 @@
+{
+  "run_id": "replay_12345_success",
+  "kind": "replay",
+  "started_at": 1788842104.084478,
+  "artifact": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_federal"
+  },
+  "inputs": {
+    "member_id": "12345"
+  },
+  "operator_port": null,
+  "ended_at": 1788842105.7158837,
+  "duration_s": 1.632,
+  "result": {
+    "outcome": "SUCCESS",
+    "outputs": {
+      "sub_account_id": "SA65212001"
+    },
+    "error": null,
+    "tier_usage": {
+      "s2": 0,
+      "s3": 0,
+      "s4": 0
+    },
+    "recoveries_applied": [],
+    "resolved_via_handoff": false,
+    "control_transitions": []
+  }
+}

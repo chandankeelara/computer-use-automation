@@ -103,26 +103,41 @@ class WebSurface(Surface):
             if action.kind in ("click", "type", "read", "assert"):
                 if action.target is None:
                     return ExecutionResult(False, f"{action.kind}: no target locator")
-                handle, tier = self._resolve(action.target)
+                handle, tier, verdicts = self._resolve(action.target)
                 if handle is None:
-                    return ExecutionResult(False, "locator all-miss", resolved_tier=-1)
+                    return ExecutionResult(
+                        False,
+                        f"locator all-miss (verdicts={verdicts})",
+                        resolved_tier=-1,
+                        tier_verdicts=verdicts,
+                    )
 
                 if action.kind == "click":
                     handle.click()
                     self.page.wait_for_load_state("domcontentloaded")
-                    return ExecutionResult(True, "clicked", resolved_tier=tier)
+                    return ExecutionResult(True, "clicked", resolved_tier=tier, tier_verdicts=verdicts)
                 if action.kind == "type":
                     handle.fill(action.value or "")
                     return ExecutionResult(
-                        True, f"typed len={len(action.value or '')}", resolved_tier=tier
+                        True, f"typed len={len(action.value or '')}",
+                        resolved_tier=tier, tier_verdicts=verdicts,
                     )
                 if action.kind == "read":
                     txt = handle.inner_text().strip()
-                    return ExecutionResult(True, "read", read_value=txt, resolved_tier=tier)
+                    return ExecutionResult(
+                        True, "read", read_value=txt,
+                        resolved_tier=tier, tier_verdicts=verdicts,
+                    )
                 if action.kind == "assert":
                     if handle.is_visible():
-                        return ExecutionResult(True, "asserted visible", resolved_tier=tier)
-                    return ExecutionResult(False, "assert: not visible", resolved_tier=tier)
+                        return ExecutionResult(
+                            True, "asserted visible",
+                            resolved_tier=tier, tier_verdicts=verdicts,
+                        )
+                    return ExecutionResult(
+                        False, "assert: not visible",
+                        resolved_tier=tier, tier_verdicts=verdicts,
+                    )
 
             return ExecutionResult(False, f"unknown action {action.kind}")
         except PWTimeout as e:
@@ -132,43 +147,66 @@ class WebSurface(Surface):
             return ExecutionResult(False, f"exception: {e}")
 
     # -- locator resolution ---------------------------------------------
+    # Locator strategies where >1 match is treated as AMBIGUOUS (=miss),
+    # not "first match wins". Anchoring/semantic strategies must uniquely
+    # identify a control — otherwise we may be about to click the wrong
+    # thing. Concrete failure mode this prevents: a positional CSS
+    # matches an unexpected interstitial's "Continue Anyway" button and
+    # the automation silently clicks it thinking it was "Confirm."
+    _AMBIGUITY_STRICT = {"role_name", "label_relative"}
+
     def _resolve(self, loc: Locator):
-        """Return (Locator handle, tier) or (None, -1). Tier 0 = primary."""
+        """Return (Locator handle, tier, per-tier verdicts).
+
+        Tier 0 = primary. `verdicts` is a list of dicts capturing what the
+        resolver observed at each tier (used for evidence / drift signal
+        and to make debugging "why did fallback fire" cheap)."""
         tiers = [loc.primary] + (loc.fallbacks or [])
+        verdicts: list[dict[str, Any]] = []
         for i, spec in enumerate(tiers):
-            handle = self._resolve_one(spec)
+            handle, verdict = self._resolve_one(spec)
+            verdicts.append({"tier": i, **verdict})
             if handle is not None:
-                return handle, i
-        return None, -1
+                return handle, i, verdicts
+        return None, -1, verdicts
 
     def _resolve_one(self, spec: dict[str, Any]):
+        """Return (handle_or_None, verdict_dict)."""
         by = spec.get("by")
         page = self.page
+        strict = by in self._AMBIGUITY_STRICT
         try:
             if by == "role_name":
                 role = spec["role"]
                 name = spec.get("name")
                 loc = page.get_by_role(role, name=name) if name else page.get_by_role(role)
-                if loc.count() > 0:
-                    return loc.first
-                return None
+                cnt = loc.count()
+                if cnt == 0:
+                    return None, {"by": by, "verdict": "miss", "count": 0}
+                if cnt > 1 and strict:
+                    return None, {"by": by, "verdict": "ambiguous", "count": cnt}
+                return loc.first, {"by": by, "verdict": "ok", "count": cnt}
             if by == "text":
                 loc = page.get_by_text(spec["text"], exact=spec.get("exact", False))
-                if loc.count() > 0:
-                    return loc.first
-                return None
+                cnt = loc.count()
+                if cnt == 0:
+                    return None, {"by": by, "verdict": "miss", "count": 0}
+                return loc.first, {"by": by, "verdict": "ok", "count": cnt}
             if by == "css":
                 loc = page.locator(spec["selector"])
-                if loc.count() > 0:
-                    return loc.first
-                return None
+                cnt = loc.count()
+                if cnt == 0:
+                    return None, {"by": by, "verdict": "miss", "count": 0}
+                return loc.first, {"by": by, "verdict": "ok", "count": cnt}
             if by == "label_relative":
-                # Anchor to label text, then walk to next input/button in DOM order.
+                # Anchor to label text, then walk to the next matching
+                # element in DOM order.
                 anchor = spec["anchor"]
                 direction = spec.get("direction", "next_input")
                 tag = {
                     "next_input": "input,textarea,select",
                     "next_button": "button,input[type=submit]",
+                    "next_cell": "td,th",
                 }.get(direction, "input")
                 # Find the label cell, then the following sibling containing the tag.
                 # Works with the target app's <td>label</td><td><input></td> pattern.
@@ -177,13 +215,16 @@ class WebSurface(Surface):
                     f"/following::{tag.split(',')[0]}[1]"
                 )
                 loc = page.locator(xp)
-                if loc.count() > 0:
-                    return loc.first
-                return None
-        except Exception:
+                cnt = loc.count()
+                if cnt == 0:
+                    return None, {"by": by, "verdict": "miss", "count": 0}
+                if cnt > 1 and strict:
+                    return None, {"by": by, "verdict": "ambiguous", "count": cnt}
+                return loc.first, {"by": by, "verdict": "ok", "count": cnt}
+        except Exception as e:
             log.exception("resolver error for %s", spec)
-            return None
-        return None
+            return None, {"by": by, "verdict": "error", "detail": str(e)}
+        return None, {"by": by, "verdict": "unknown_kind"}
 
 
 _AX_WALKER_JS = r"""

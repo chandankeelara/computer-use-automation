@@ -1,0 +1,15 @@
+{% extends "_acme_base.html" %}
+{% block content %}
+<div class="wizard-steps"><span>1. Lookup</span><span class="on">2. Review</span><span>3. Confirm</span></div>
+<h1>Review member</h1>
+<dl>
+  <dt>Member Number</dt><dd>{{ mid }}</dd>
+  <dt>Name</dt><dd>{{ member.name }}</dd>
+  <dt>Balance</dt><dd>${{ member.balance }}</dd>
+</dl>
+<form method="post" action="/wizard/step-3/open">
+  <input type="hidden" name="mid" value="{{ mid }}">
+  <button type="submit" data-role="open-subaccount">Open Sub-Account</button>
+  <button type="button" class="secondary" onclick="history.back()">Back</button>
+</form>
+{% endblock %}

@@ -1,4 +1,4 @@
-{"step": 1, "step_id": "s1", "action": "navigate", "risk": "safe", "ok": true, "detail": "navigated to http://127.0.0.1:5000/", "resolved_tier": -1, "ms": 41}
-{"step": 2, "step_id": "s2", "action": "type", "risk": "safe", "ok": true, "detail": "typed len=5", "resolved_tier": 0, "ms": 48}
-{"step": 3, "step_id": "s3", "action": "click", "risk": "safe", "ok": true, "detail": "clicked", "resolved_tier": 0, "ms": 141}
-{"step": 4, "step_id": "s4", "action": "click", "risk": "risky", "ok": false, "detail": "locator all-miss", "resolved_tier": -1, "ms": 21, "screenshot_on_fail": "evidence\\replay_99999_9905b0\\screenshots\\step_4.png"}
+{"step_id": "s1", "action": "navigate", "attempt": 1, "ok": true, "detail": "navigated to http://127.0.0.1:5000/", "resolved_tier": -1, "ms": 19}
+{"step_id": "s2", "action": "type", "attempt": 1, "ok": true, "detail": "typed len=5", "resolved_tier": 0, "ms": 34}
+{"step_id": "s3", "action": "click", "attempt": 1, "ok": true, "detail": "clicked", "resolved_tier": 0, "ms": 65}
+{"step_id": "s4", "action": "click", "attempt": 1, "ok": false, "detail": "locator all-miss", "resolved_tier": -1, "ms": 21}

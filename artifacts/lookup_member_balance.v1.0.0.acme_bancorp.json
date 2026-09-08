@@ -1,0 +1,108 @@
+{
+  "id": {
+    "name": "lookup_member_balance",
+    "version": "1.0.0",
+    "target": "acme_bancorp"
+  },
+  "title": "Look up member balance (ACME Bancorp)",
+  "description": "Read-only capability against the ACME wizard. Same contract as the Midwest artifact; different steps (wizard has an explicit /wizard/step-2 review page where the balance is rendered).",
+  "input_schema": {
+    "type": "object",
+    "required": ["member_id"],
+    "properties": {
+      "member_id": { "type": "string", "example": "A-1042" }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "savings_balance": {
+        "type": "string",
+        "pattern": "^[0-9,]+\\.[0-9]{2}$"
+      }
+    },
+    "required": ["savings_balance"]
+  },
+  "outcomes": [
+    {
+      "code": "SUCCESS",
+      "terminal": true,
+      "detected_by": {
+        "kind": "url_pattern",
+        "pattern": "^.*/wizard/step-2\\?.*$"
+      },
+      "extracts": [
+        {
+          "name": "savings_balance",
+          "from": "text",
+          "locator": {
+            "primary": { "by": "css", "selector": "dl dd:nth-of-type(3)" },
+            "fallbacks": []
+          },
+          "regex": "\\$([0-9,]+\\.[0-9]{2})"
+        }
+      ]
+    },
+    {
+      "code": "MEMBER_NOT_FOUND",
+      "terminal": true,
+      "detected_by": { "kind": "text_present", "text": "Member not found" },
+      "extracts": []
+    },
+    {
+      "code": "ACCESS_DENIED",
+      "terminal": true,
+      "detected_by": { "kind": "text_present", "text": "Servicing suspended" },
+      "extracts": []
+    }
+  ],
+  "side_effects": [],
+  "steps": [
+    {
+      "id": "s1",
+      "action": "navigate",
+      "url": "http://127.0.0.1:5001/wizard/step-1",
+      "risk": "safe",
+      "notes": "Open the lookup step."
+    },
+    {
+      "id": "s2",
+      "action": "type",
+      "target": {
+        "primary": { "by": "label_relative", "anchor": "Member Number", "direction": "next_input" },
+        "fallbacks": [
+          { "by": "css", "selector": "input[name='member']" },
+          { "by": "css", "selector": "#member_field" }
+        ]
+      },
+      "value": "{{member_id}}",
+      "risk": "safe",
+      "notes": "Enter member number."
+    },
+    {
+      "id": "s3",
+      "action": "click",
+      "target": {
+        "primary": { "by": "role_name", "role": "button", "name": "Look up" },
+        "fallbacks": [ { "by": "css", "selector": "button[data-role='lookup-submit']" } ]
+      },
+      "risk": "safe",
+      "notes": "Navigate to step 2 which renders the balance."
+    }
+  ],
+  "checkpoint": {
+    "kind": "url_pattern",
+    "pattern": "^.*/wizard/step-2\\?.*$"
+  },
+  "recoveries": [],
+  "approval_state": "approved",
+  "approved_by": "chandan",
+  "approved_at": "2026-09-08T05:35:00Z",
+  "provenance": {
+    "goal": "Look up member balance on ACME (read-only)",
+    "model": "author-annotated@1",
+    "recorded_at": "2026-09-08T05:35:00Z",
+    "run_id": "authored_acme_balance_v1",
+    "target_url": "http://127.0.0.1:5001"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "id": {
+    "name": "lookup_member_balance",
+    "version": "1.0.0",
+    "target": "midwest_with_reauth"
+  },
+  "title": "Balance lookup demoing reauth recovery",
+  "description": "Same as lookup_member_balance but the entry URL sets ?expire=1 so the next POST /search triggers 'Session expired'. The declared reauth recovery clicks 'Sign in' and restarts the flow from step 0. Second attempt succeeds because the flag only fires once per session. Golden replay artifact for the reauth vocabulary.",
+  "input_schema": {
+    "type": "object",
+    "required": ["member_id"],
+    "properties": {"member_id": {"type": "string", "example": "12345"}}
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {"savings_balance": {"type": "string", "pattern": "^[0-9,]+\\.[0-9]{2}$"}},
+    "required": ["savings_balance"]
+  },
+  "outcomes": [
+    {
+      "code": "SUCCESS",
+      "terminal": true,
+      "detected_by": {"kind": "url_pattern", "pattern": "^.*/member/\\d+$"},
+      "extracts": [
+        {
+          "name": "savings_balance",
+          "from": "text",
+          "locator": {
+            "primary": {"by": "label_relative", "anchor": "Savings Balance", "direction": "next_cell"},
+            "fallbacks": []
+          },
+          "regex": "\\$([0-9,]+\\.[0-9]{2})"
+        }
+      ]
+    }
+  ],
+  "side_effects": [],
+  "steps": [
+    {"id": "s1", "action": "navigate", "url": "http://127.0.0.1:5000/?expire=1", "risk": "safe", "notes": "Enter — arms session-expire on the next search."},
+    {
+      "id": "s2",
+      "action": "type",
+      "target": {
+        "primary": {"by": "label_relative", "anchor": "Member ID", "direction": "next_input"},
+        "fallbacks": [{"by": "css", "selector": "input[name='q']"}]
+      },
+      "value": "{{member_id}}",
+      "risk": "safe"
+    },
+    {
+      "id": "s3",
+      "action": "click",
+      "target": {
+        "primary": {"by": "role_name", "role": "button", "name": "Search"},
+        "fallbacks": [{"by": "css", "selector": "input[type=submit][value='Search']"}]
+      },
+      "risk": "safe"
+    }
+  ],
+  "checkpoint": {"kind": "url_pattern", "pattern": "^.*/member/\\d+$"},
+  "recoveries": [
+    {
+      "name": "reauth_on_session_expire",
+      "trigger": {"kind": "text_present", "text": "Session expired"},
+      "action": "reauth",
+      "reauth_locator": {
+        "primary": {"by": "role_name", "role": "link", "name": "Sign in"},
+        "fallbacks": [{"by": "css", "selector": "a[href='/login']"}]
+      },
+      "reauth_wait_ms": 200,
+      "max_attempts": 2,
+      "notes": "Standard mid-flow session-timeout recovery: click Sign in, then restart the flow from step 0."
+    }
+  ],
+  "approval_state": "approved",
+  "approved_by": "chandan",
+  "approved_at": "2026-09-08T00:00:00Z",
+  "provenance": {
+    "goal": "Lookup balance across a reauth wall",
+    "model": "author-annotated@1",
+    "recorded_at": "2026-09-08T00:00:00Z",
+    "run_id": "authored_reauth_demo",
+    "target_url": "http://127.0.0.1:5000"
+  }
+}

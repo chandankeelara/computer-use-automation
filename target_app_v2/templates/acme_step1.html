@@ -1,0 +1,13 @@
+{% extends "_acme_base.html" %}
+{% block content %}
+<div class="wizard-steps"><span class="on">1. Lookup</span><span>2. Review</span><span>3. Confirm</span></div>
+<h1>Look up a member</h1>
+<form method="post" action="/wizard/step-1">
+  <label for="member_field">Member Number</label>
+  <input id="member_field" type="text" name="member">
+  <button type="submit" data-role="lookup-submit">Look up</button>
+</form>
+{% if err %}
+<div class="err">{{ err }}</div>
+{% endif %}
+{% endblock %}

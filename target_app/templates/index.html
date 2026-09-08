@@ -1,11 +1,12 @@
 {% extends "_base.html" %}
 {% block content %}
+{% set input_name = 'cif' if g.tenant == 'summit' else 'q' %}
 <table class="cls_frm">
-  <tr><td colspan="2"><b>Member Lookup</b></td></tr>
+  <tr><td colspan="2"><b>{% if g.tenant == 'summit' %}CIF Lookup{% else %}Member Lookup{% endif %}</b></td></tr>
   <form method="post" action="/search">
   <tr>
-    <td>Member ID</td>
-    <td><input type="text" name="q" size="20"></td>
+    <td>{{ g.labels.member_id_label }}</td>
+    <td><input type="text" name="{{ input_name }}" size="20"></td>
   </tr>
   <tr>
     <td></td>

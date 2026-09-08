@@ -1,10 +1,11 @@
 <!doctype html>
 <html>
 <head>
-<title>Midwest Federal Servicing Console</title>
+<title>{{ g.labels.brand }}</title>
 <style>
 body { font-family: Verdana, sans-serif; font-size: 12px; background: #eee; margin: 0; }
 .cls_hdr { background: #003366; color: #fff; padding: 6px 10px; }
+.cls_hdr.summit { background: #2b6b3f; }
 .cls_wrap { padding: 10px; }
 table { border-collapse: collapse; }
 table.cls_frm td { padding: 3px 6px; }
@@ -13,11 +14,23 @@ table.cls_data td, table.cls_data th { border: 1px solid #bbb; padding: 4px 8px;
 input[type=text], input[type=password] { border: 1px solid #999; padding: 2px 4px; font-family: inherit; }
 .cls_btn { background: #ddd; border: 1px outset #aaa; padding: 2px 10px; font-family: inherit; }
 .cls_err { color: #a00; }
+.cls_flap {
+  background: #fffbcc; border: 1px solid #cc9; padding: 8px 12px; margin-bottom: 10px;
+}
+.cls_flap button { margin-left: 12px; }
 </style>
 </head>
 <body>
-<div class="cls_hdr">Midwest Federal Servicing Console &nbsp;|&nbsp; v3.11.7</div>
+<div class="cls_hdr {{ 'summit' if g.tenant == 'summit' else '' }}">
+  {{ g.labels.brand }} &nbsp;|&nbsp; v3.11.7
+</div>
 <div class="cls_wrap">
+{% if g.flap %}
+<div class="cls_flap" id="flapModal">
+  Session refresh recommended. This message appears intermittently and can be dismissed.
+  <button type="button" class="cls_btn" onclick="document.getElementById('flapModal').remove()">Dismiss</button>
+</div>
+{% endif %}
 {% block content %}{% endblock %}
 </div>
 </body>

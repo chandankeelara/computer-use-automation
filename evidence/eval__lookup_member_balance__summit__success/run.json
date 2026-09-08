@@ -1,0 +1,30 @@
+{
+  "run_id": "eval__lookup_member_balance__summit__success",
+  "kind": "replay",
+  "started_at": 1788846288.3931696,
+  "artifact": {
+    "name": "lookup_member_balance",
+    "version": "1.0.0",
+    "target": "summit_credit_union"
+  },
+  "inputs": {
+    "member_id": "12345"
+  },
+  "operator_port": null,
+  "ended_at": 1788846289.01809,
+  "duration_s": 0.625,
+  "result": {
+    "outcome": "SUCCESS",
+    "outputs": {
+      "savings_balance": "1,234.56"
+    },
+    "error": null,
+    "tier_usage": {
+      "s2": 0,
+      "s3": 0
+    },
+    "recoveries_applied": [],
+    "resolved_via_handoff": false,
+    "control_transitions": []
+  }
+}

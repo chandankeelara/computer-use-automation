@@ -1,0 +1,13 @@
+{
+  "capability": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_federal"
+  },
+  "step_id": "s3",
+  "reason": "locator all-miss or action error: locator all-miss",
+  "observed": "locator all-miss",
+  "current_url": "http://127.0.0.1:5000/",
+  "screenshot_path": "evidence\\replay_hard_failure\\screenshots\\step_4.png",
+  "ax_snapshot_path": "evidence\\replay_hard_failure\\ax\\step_4.json"
+}

@@ -1,0 +1,50 @@
+{
+  "artifact": "artifacts\\open_sub_account.v1.0.0.midwest_federal.json",
+  "n": 5,
+  "success_rate": 1.0,
+  "outcomes": {
+    "SUCCESS": 5
+  },
+  "duration_s": {
+    "mean": 0.76,
+    "p95": 0.77
+  },
+  "tier_usage_per_step": {
+    "s2": {
+      "0": 5
+    },
+    "s3": {
+      "0": 5
+    },
+    "s4": {
+      "0": 5
+    }
+  },
+  "runs": [
+    {
+      "run": 1,
+      "outcome": "SUCCESS",
+      "duration_s": 0.77
+    },
+    {
+      "run": 2,
+      "outcome": "SUCCESS",
+      "duration_s": 0.78
+    },
+    {
+      "run": 3,
+      "outcome": "SUCCESS",
+      "duration_s": 0.76
+    },
+    {
+      "run": 4,
+      "outcome": "SUCCESS",
+      "duration_s": 0.75
+    },
+    {
+      "run": 5,
+      "outcome": "SUCCESS",
+      "duration_s": 0.74
+    }
+  ]
+}

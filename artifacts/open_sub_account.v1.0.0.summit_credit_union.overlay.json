@@ -1,0 +1,50 @@
+{
+  "id": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "summit_credit_union"
+  },
+  "based_on": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_federal"
+  },
+  "title": "Open sub-account (Summit Credit Union)",
+  "description": "Same vendor product as Midwest Federal, but white-labelled: 'Member ID' -> 'CIF ID', 'Open Sub-Account' -> 'Open Additional Account', AND the underlying form field is renamed q -> cif. Overlay patches the label anchor AND the CSS fallback so both tiers survive.",
+  "entry_url": "http://127.0.0.1:5000/?tenant=summit",
+  "step_patches": [
+    {
+      "step_id": "s2",
+      "target": {
+        "primary": {
+          "by": "label_relative",
+          "anchor": "CIF ID",
+          "direction": "next_input"
+        },
+        "fallbacks": [
+          { "by": "css", "selector": "input[name='cif']" },
+          { "by": "role_name", "role": "textbox" }
+        ]
+      },
+      "notes": "Anchor label differs AND underlying field name differs; both tiers retargeted."
+    },
+    {
+      "step_id": "s4",
+      "target": {
+        "primary": {
+          "by": "role_name",
+          "role": "button",
+          "name": "Open Additional Account"
+        },
+        "fallbacks": [
+          { "by": "css", "selector": "input[type=submit][value='Open Additional Account']" }
+        ]
+      },
+      "notes": "Submit button name differs across tenants."
+    }
+  ],
+  "extra_outcomes": [],
+  "extra_recoveries": [],
+  "extra_allowed_domains": [],
+  "notes": "Second tenant on the same underlying vendor product. Base artifact would structurally break on Summit at step s2 (name='q' fallback misses) and s4 (button text differs); the overlay makes both tiers survive."
+}

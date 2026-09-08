@@ -31,10 +31,16 @@ PolicyDecision = Union[Allowed, Denied, RequiresApproval]
 
 
 class Policy:
-    def __init__(self, allowed_domains, allowed_actions, risky_gate: bool):
+    def __init__(self, allowed_domains, allowed_actions, risky_gate: bool,
+                 notify_bell: bool = True,
+                 notify_webhook_url: Optional[str] = None,
+                 notify_slack_webhook_url: Optional[str] = None):
         self.allowed_domains = set(allowed_domains)
         self.allowed_actions = set(allowed_actions)
         self.risky_gate = risky_gate
+        self.notify_bell = notify_bell
+        self.notify_webhook_url = notify_webhook_url
+        self.notify_slack_webhook_url = notify_slack_webhook_url
 
     @classmethod
     def from_yaml(cls, path: str) -> "Policy":
@@ -44,6 +50,9 @@ class Policy:
             allowed_domains=data.get("allowed_domains", []),
             allowed_actions=data.get("allowed_actions", []),
             risky_gate=bool(data.get("risky_actions_require_approval", True)),
+            notify_bell=bool(data.get("notify_bell", True)),
+            notify_webhook_url=data.get("notify_webhook_url"),
+            notify_slack_webhook_url=data.get("notify_slack_webhook_url"),
         )
 
     def check(

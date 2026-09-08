@@ -1,0 +1,70 @@
+{
+    "tools": [
+        {
+            "name": "open_sub_account__1_0_0__midwest_federal",
+            "description": "Look up a member by ID and open a new sub-account. Returns the new sub-account number.\n\nDeclared outcomes: SUCCESS, MEMBER_NOT_FOUND, ACCESS_DENIED, VALIDATION_ERROR.\nSide effects: creates_sub_account(reversible=False).\nThis capability replays deterministically; no LLM is invoked in the loop.",
+            "input_schema": {
+                "type": "object",
+                "required": [
+                    "member_id"
+                ],
+                "properties": {
+                    "member_id": {
+                        "type": "string",
+                        "example": "12345"
+                    }
+                }
+            },
+            "output_schema": {
+                "type": "object",
+                "properties": {
+                    "sub_account_id": {
+                        "type": "string",
+                        "pattern": "^SA\\d+$"
+                    }
+                },
+                "required": [
+                    "sub_account_id"
+                ]
+            },
+            "identity": {
+                "name": "open_sub_account",
+                "version": "1.0.0",
+                "target": "midwest_federal"
+            }
+        },
+        {
+            "name": "open_sub_account__1_0_0__summit_credit_union",
+            "description": "Same vendor product as Midwest Federal, but white-labelled: 'Member ID' -> 'CIF ID', 'Open Sub-Account' -> 'Open Additional Account', AND the underlying form field is renamed q -> cif. Overlay patches the label anchor AND the CSS fallback so both tiers survive.\n\nDeclared outcomes: SUCCESS, MEMBER_NOT_FOUND, ACCESS_DENIED, VALIDATION_ERROR.\nSide effects: creates_sub_account(reversible=False).\nThis capability replays deterministically; no LLM is invoked in the loop.",
+            "input_schema": {
+                "type": "object",
+                "required": [
+                    "member_id"
+                ],
+                "properties": {
+                    "member_id": {
+                        "type": "string",
+                        "example": "12345"
+                    }
+                }
+            },
+            "output_schema": {
+                "type": "object",
+                "properties": {
+                    "sub_account_id": {
+                        "type": "string",
+                        "pattern": "^SA\\d+$"
+                    }
+                },
+                "required": [
+                    "sub_account_id"
+                ]
+            },
+            "identity": {
+                "name": "open_sub_account",
+                "version": "1.0.0",
+                "target": "summit_credit_union"
+            }
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+  "run_id": "replay_reauth_session_expire",
+  "kind": "replay",
+  "started_at": 1788846072.1489408,
+  "artifact": {
+    "name": "lookup_member_balance",
+    "version": "1.0.0",
+    "target": "midwest_federal_with_expire"
+  },
+  "inputs": {
+    "member_id": "12345"
+  },
+  "operator_port": null,
+  "ended_at": 1788846073.181267,
+  "duration_s": 1.032,
+  "result": {
+    "outcome": "SUCCESS",
+    "outputs": {
+      "savings_balance": "1,234.56"
+    },
+    "error": null,
+    "tier_usage": {
+      "s2": 0,
+      "s3": 0
+    },
+    "recoveries_applied": [
+      {
+        "name": "reauth_on_session_expire",
+        "action": "reauth",
+        "step_id": "s3",
+        "restart_from_step_0": true,
+        "ok": true
+      }
+    ],
+    "resolved_via_handoff": false,
+    "control_transitions": []
+  }
+}

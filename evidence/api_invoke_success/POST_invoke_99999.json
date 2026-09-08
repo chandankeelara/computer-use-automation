@@ -1,0 +1,13 @@
+{
+    "artifact": "open_sub_account.v1.0.0.midwest_federal.json",
+    "outcome": "MEMBER_NOT_FOUND",
+    "outputs": null,
+    "error": null,
+    "evidence_dir": "evidence\\replay_99999_b145b8",
+    "resolved_via_handoff": false,
+    "tier_usage": {
+        "s2": 0,
+        "s3": 0
+    },
+    "recoveries_applied": []
+}

@@ -1,0 +1,93 @@
+{
+  "description": "Golden replay scenarios. Each entry names a capability, inputs, and the expected outcome. `cua eval` runs each unattended and headless, comparing outcome and (optionally) outputs by regex. Non-zero exit on any mismatch — suitable for CI. This is the promotion gate a real system would check before flipping an artifact from draft to approved.",
+  "scenarios": [
+    {
+      "name": "open_sub_account__midwest__success",
+      "artifact": "artifacts/open_sub_account.v1.0.0.midwest_federal.json",
+      "inputs": {"member_id": "12345"},
+      "auto_approve_risky": true,
+      "expected_outcome": "SUCCESS",
+      "expected_output_patterns": {"sub_account_id": "^SA\\d+$"}
+    },
+    {
+      "name": "open_sub_account__midwest__member_not_found",
+      "artifact": "artifacts/open_sub_account.v1.0.0.midwest_federal.json",
+      "inputs": {"member_id": "99999"},
+      "expected_outcome": "MEMBER_NOT_FOUND"
+    },
+    {
+      "name": "open_sub_account__midwest__access_denied",
+      "artifact": "artifacts/open_sub_account.v1.0.0.midwest_federal.json",
+      "inputs": {"member_id": "55555"},
+      "expected_outcome": "ACCESS_DENIED"
+    },
+    {
+      "name": "open_sub_account__midwest__validation_error",
+      "artifact": "artifacts/open_sub_account.v1.0.0.midwest_federal.json",
+      "inputs": {"member_id": "00000"},
+      "expected_outcome": "VALIDATION_ERROR"
+    },
+    {
+      "name": "open_sub_account__summit_overlay__success",
+      "artifact": "artifacts/open_sub_account.v1.0.0.summit_credit_union.overlay.json",
+      "inputs": {"member_id": "12345"},
+      "auto_approve_risky": true,
+      "expected_outcome": "SUCCESS",
+      "expected_output_patterns": {"sub_account_id": "^SA\\d+$"}
+    },
+    {
+      "name": "open_sub_account__acme__success",
+      "artifact": "artifacts/open_sub_account.v1.0.0.acme_bancorp.json",
+      "inputs": {"member_id": "A-1042"},
+      "auto_approve_risky": true,
+      "expected_outcome": "SUCCESS",
+      "expected_output_patterns": {"sub_account_id": "^SA\\d+$"}
+    },
+    {
+      "name": "open_sub_account__acme__member_not_found",
+      "artifact": "artifacts/open_sub_account.v1.0.0.acme_bancorp.json",
+      "inputs": {"member_id": "A-XXXX"},
+      "expected_outcome": "MEMBER_NOT_FOUND"
+    },
+    {
+      "name": "open_sub_account__acme__access_denied",
+      "artifact": "artifacts/open_sub_account.v1.0.0.acme_bancorp.json",
+      "inputs": {"member_id": "A-9001"},
+      "expected_outcome": "ACCESS_DENIED"
+    },
+    {
+      "name": "lookup_member_balance__midwest__success",
+      "artifact": "artifacts/lookup_member_balance.v1.0.0.midwest_federal.json",
+      "inputs": {"member_id": "12345"},
+      "expected_outcome": "SUCCESS",
+      "expected_output_patterns": {"savings_balance": "^[0-9,]+\\.[0-9]{2}$"}
+    },
+    {
+      "name": "lookup_member_balance__summit__success",
+      "artifact": "artifacts/lookup_member_balance.v1.0.0.summit_credit_union.overlay.json",
+      "inputs": {"member_id": "12345"},
+      "expected_outcome": "SUCCESS",
+      "expected_output_patterns": {"savings_balance": "^[0-9,]+\\.[0-9]{2}$"}
+    },
+    {
+      "name": "lookup_member_balance__acme__success",
+      "artifact": "artifacts/lookup_member_balance.v1.0.0.acme_bancorp.json",
+      "inputs": {"member_id": "A-1042"},
+      "expected_outcome": "SUCCESS",
+      "expected_output_patterns": {"savings_balance": "^[0-9,]+\\.[0-9]{2}$"}
+    },
+    {
+      "name": "lookup_member_balance__midwest__member_not_found",
+      "artifact": "artifacts/lookup_member_balance.v1.0.0.midwest_federal.json",
+      "inputs": {"member_id": "99999"},
+      "expected_outcome": "MEMBER_NOT_FOUND"
+    },
+    {
+      "name": "reauth_recovery_on_session_expire",
+      "artifact": "artifacts/lookup_member_balance.v1.0.0.midwest_with_reauth.json",
+      "inputs": {"member_id": "12345"},
+      "expected_outcome": "SUCCESS",
+      "expected_output_patterns": {"savings_balance": "^[0-9,]+\\.[0-9]{2}$"}
+    }
+  ]
+}

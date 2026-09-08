@@ -1,0 +1,39 @@
+{
+  "run_id": "replay_hard_failure",
+  "kind": "replay",
+  "started_at": 1788842176.8191926,
+  "artifact": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "midwest_federal"
+  },
+  "inputs": {
+    "member_id": "12345"
+  },
+  "operator_port": null,
+  "ended_at": 1788842177.465631,
+  "duration_s": 0.646,
+  "result": {
+    "outcome": "ESCALATED_UNRESOLVED",
+    "outputs": null,
+    "error": {
+      "step": "s3",
+      "expected": "step_succeeds",
+      "observed": "locator all-miss"
+    },
+    "tier_usage": {
+      "s2": 0
+    },
+    "recoveries_applied": [],
+    "resolved_via_handoff": false,
+    "control_transitions": [
+      {
+        "ts": 1788842177.4591148,
+        "from": "agent",
+        "to": "paused",
+        "reason": "locator all-miss or action error: locator all-miss",
+        "actor": "system"
+      }
+    ]
+  }
+}

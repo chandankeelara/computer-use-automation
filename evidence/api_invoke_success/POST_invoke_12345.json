@@ -1,0 +1,16 @@
+{
+    "artifact": "open_sub_account.v1.0.0.midwest_federal.json",
+    "outcome": "SUCCESS",
+    "outputs": {
+        "sub_account_id": "SA47078941"
+    },
+    "error": null,
+    "evidence_dir": "evidence\\replay_12345_6a8ddc",
+    "resolved_via_handoff": false,
+    "tier_usage": {
+        "s2": 0,
+        "s3": 0,
+        "s4": 0
+    },
+    "recoveries_applied": []
+}

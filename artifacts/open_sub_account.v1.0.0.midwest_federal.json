@@ -60,6 +60,28 @@
         "locator": null
       },
       "extracts": []
+    },
+    {
+      "code": "ACCESS_DENIED",
+      "terminal": true,
+      "detected_by": {
+        "kind": "text_present",
+        "pattern": null,
+        "text": "Access denied for member",
+        "locator": null
+      },
+      "extracts": []
+    },
+    {
+      "code": "VALIDATION_ERROR",
+      "terminal": true,
+      "detected_by": {
+        "kind": "text_present",
+        "pattern": null,
+        "text": "Invalid input for",
+        "locator": null
+      },
+      "extracts": []
     }
   ],
   "side_effects": [
@@ -155,10 +177,35 @@
     "pattern": "^.*/member/\\d+/confirm/SA\\d+$",
     "text": null
   },
+  "recoveries": [
+    {
+      "name": "dismiss_session_refresh_flap",
+      "trigger": {
+        "kind": "text_present",
+        "pattern": null,
+        "text": "Session refresh recommended",
+        "locator": null
+      },
+      "action": "dismiss",
+      "dismiss_locator": {
+        "primary": {
+          "by": "css",
+          "selector": "#flapModal button"
+        },
+        "fallbacks": []
+      },
+      "wait_ms": 0,
+      "max_attempts": 2,
+      "notes": "Auto-dismiss the intermittent session refresh interstitial."
+    }
+  ],
+  "approval_state": "approved",
+  "approved_by": "chandan",
+  "approved_at": "2026-09-08T05:17:43.938491Z",
   "provenance": {
     "goal": "Open a sub-account for member 12345",
     "model": "mock-llm@1",
-    "recorded_at": "2026-09-04T10:51:52.717725Z",
+    "recorded_at": "2026-09-08T04:34:52.018265Z",
     "run_id": "discovery_12345",
     "target_url": "http://127.0.0.1:5000"
   }

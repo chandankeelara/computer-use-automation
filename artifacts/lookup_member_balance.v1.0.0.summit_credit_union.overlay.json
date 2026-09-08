@@ -1,0 +1,32 @@
+{
+  "id": {
+    "name": "lookup_member_balance",
+    "version": "1.0.0",
+    "target": "summit_credit_union"
+  },
+  "based_on": {
+    "name": "lookup_member_balance",
+    "version": "1.0.0",
+    "target": "midwest_federal"
+  },
+  "title": "Look up member balance (Summit Credit Union)",
+  "description": "Summit tenant overlay for lookup_member_balance. Retargets s2's anchor to 'CIF ID' and the CSS fallback to input[name='cif'] to match Summit's renamed form field.",
+  "entry_url": "http://127.0.0.1:5000/?tenant=summit",
+  "step_patches": [
+    {
+      "step_id": "s2",
+      "target": {
+        "primary": { "by": "label_relative", "anchor": "CIF ID", "direction": "next_input" },
+        "fallbacks": [
+          { "by": "css", "selector": "input[name='cif']" },
+          { "by": "role_name", "role": "textbox" }
+        ]
+      },
+      "notes": "CIF ID / cif field on Summit."
+    }
+  ],
+  "extra_outcomes": [],
+  "extra_recoveries": [],
+  "extra_allowed_domains": [],
+  "notes": "Read-only capability, same overlay pattern as the mutating one."
+}

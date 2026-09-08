@@ -1,0 +1,9 @@
+{% extends "_acme_base.html" %}
+{% block content %}
+<div class="wizard-steps"><span>1. Lookup</span><span>2. Review</span><span class="on">3. Confirm</span></div>
+<h1>Sub-account opened</h1>
+<dl>
+  <dt>Member Number</dt><dd>{{ mid }}</dd>
+  <dt>New Sub-Account</dt><dd id="sub_id">{{ sub }}</dd>
+</dl>
+{% endblock %}

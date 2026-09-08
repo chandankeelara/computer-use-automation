@@ -1,0 +1,139 @@
+{
+  "evals": "evals/replay.json",
+  "total": 13,
+  "pass": 13,
+  "fail": 0,
+  "results": [
+    {
+      "name": "open_sub_account__midwest__success",
+      "pass": true,
+      "expected_outcome": "SUCCESS",
+      "got_outcome": "SUCCESS",
+      "got_outputs": {
+        "sub_account_id": "SA19276696"
+      },
+      "output_mismatches": [],
+      "evidence_dir": "evidence\\eval__open_sub_account__midwest__success"
+    },
+    {
+      "name": "open_sub_account__midwest__member_not_found",
+      "pass": true,
+      "expected_outcome": "MEMBER_NOT_FOUND",
+      "got_outcome": "MEMBER_NOT_FOUND",
+      "got_outputs": null,
+      "output_mismatches": [],
+      "evidence_dir": "evidence\\eval__open_sub_account__midwest__member_not_found"
+    },
+    {
+      "name": "open_sub_account__midwest__access_denied",
+      "pass": true,
+      "expected_outcome": "ACCESS_DENIED",
+      "got_outcome": "ACCESS_DENIED",
+      "got_outputs": null,
+      "output_mismatches": [],
+      "evidence_dir": "evidence\\eval__open_sub_account__midwest__access_denied"
+    },
+    {
+      "name": "open_sub_account__midwest__validation_error",
+      "pass": true,
+      "expected_outcome": "VALIDATION_ERROR",
+      "got_outcome": "VALIDATION_ERROR",
+      "got_outputs": null,
+      "output_mismatches": [],
+      "evidence_dir": "evidence\\eval__open_sub_account__midwest__validation_error"
+    },
+    {
+      "name": "open_sub_account__summit_overlay__success",
+      "pass": true,
+      "expected_outcome": "SUCCESS",
+      "got_outcome": "SUCCESS",
+      "got_outputs": {
+        "sub_account_id": "SA24457032"
+      },
+      "output_mismatches": [],
+      "evidence_dir": "evidence\\eval__open_sub_account__summit_overlay__success"
+    },
+    {
+      "name": "open_sub_account__acme__success",
+      "pass": true,
+      "expected_outcome": "SUCCESS",
+      "got_outcome": "SUCCESS",
+      "got_outputs": {
+        "sub_account_id": "SA28188617"
+      },
+      "output_mismatches": [],
+      "evidence_dir": "evidence\\eval__open_sub_account__acme__success"
+    },
+    {
+      "name": "open_sub_account__acme__member_not_found",
+      "pass": true,
+      "expected_outcome": "MEMBER_NOT_FOUND",
+      "got_outcome": "MEMBER_NOT_FOUND",
+      "got_outputs": null,
+      "output_mismatches": [],
+      "evidence_dir": "evidence\\eval__open_sub_account__acme__member_not_found"
+    },
+    {
+      "name": "open_sub_account__acme__access_denied",
+      "pass": true,
+      "expected_outcome": "ACCESS_DENIED",
+      "got_outcome": "ACCESS_DENIED",
+      "got_outputs": null,
+      "output_mismatches": [],
+      "evidence_dir": "evidence\\eval__open_sub_account__acme__access_denied"
+    },
+    {
+      "name": "lookup_member_balance__midwest__success",
+      "pass": true,
+      "expected_outcome": "SUCCESS",
+      "got_outcome": "SUCCESS",
+      "got_outputs": {
+        "savings_balance": "1,234.56"
+      },
+      "output_mismatches": [],
+      "evidence_dir": "evidence\\eval__lookup_member_balance__midwest__success"
+    },
+    {
+      "name": "lookup_member_balance__summit__success",
+      "pass": true,
+      "expected_outcome": "SUCCESS",
+      "got_outcome": "SUCCESS",
+      "got_outputs": {
+        "savings_balance": "1,234.56"
+      },
+      "output_mismatches": [],
+      "evidence_dir": "evidence\\eval__lookup_member_balance__summit__success"
+    },
+    {
+      "name": "lookup_member_balance__acme__success",
+      "pass": true,
+      "expected_outcome": "SUCCESS",
+      "got_outcome": "SUCCESS",
+      "got_outputs": {
+        "savings_balance": "8,240.10"
+      },
+      "output_mismatches": [],
+      "evidence_dir": "evidence\\eval__lookup_member_balance__acme__success"
+    },
+    {
+      "name": "lookup_member_balance__midwest__member_not_found",
+      "pass": true,
+      "expected_outcome": "MEMBER_NOT_FOUND",
+      "got_outcome": "MEMBER_NOT_FOUND",
+      "got_outputs": null,
+      "output_mismatches": [],
+      "evidence_dir": "evidence\\eval__lookup_member_balance__midwest__member_not_found"
+    },
+    {
+      "name": "reauth_recovery_on_session_expire",
+      "pass": true,
+      "expected_outcome": "SUCCESS",
+      "got_outcome": "SUCCESS",
+      "got_outputs": {
+        "savings_balance": "1,234.56"
+      },
+      "output_mismatches": [],
+      "evidence_dir": "evidence\\eval__reauth_recovery_on_session_expire"
+    }
+  ]
+}

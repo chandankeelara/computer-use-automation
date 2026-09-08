@@ -1,0 +1,191 @@
+{
+  "id": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "acme_bancorp"
+  },
+  "title": "Open sub-account (ACME Bancorp)",
+  "description": "Second vendor product. Same capability contract as the Midwest Federal artifact (same input_schema, same output_schema, same declared outcomes) but structurally different steps: a wizard-style 3-page flow rather than a single search page. Proves the identity triple (name, version, target) can host structurally distinct implementations under one addressable name.",
+  "input_schema": {
+    "type": "object",
+    "required": [
+      "member_id"
+    ],
+    "properties": {
+      "member_id": {
+        "type": "string",
+        "example": "A-1042"
+      }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "sub_account_id": {
+        "type": "string",
+        "pattern": "^SA\\d+$"
+      }
+    },
+    "required": [
+      "sub_account_id"
+    ]
+  },
+  "outcomes": [
+    {
+      "code": "SUCCESS",
+      "terminal": true,
+      "detected_by": {
+        "kind": "url_pattern",
+        "pattern": "^.*/wizard/step-3/confirm\\?.*id=SA\\d+.*$",
+        "text": null,
+        "locator": null
+      },
+      "extracts": [
+        {
+          "name": "sub_account_id",
+          "from": "url",
+          "locator": null,
+          "url_pattern": null,
+          "regex": "id=(?P<sub_account_id>SA\\d+)"
+        }
+      ]
+    },
+    {
+      "code": "MEMBER_NOT_FOUND",
+      "terminal": true,
+      "detected_by": {
+        "kind": "text_present",
+        "pattern": null,
+        "text": "Member not found",
+        "locator": null
+      },
+      "extracts": []
+    },
+    {
+      "code": "ACCESS_DENIED",
+      "terminal": true,
+      "detected_by": {
+        "kind": "text_present",
+        "pattern": null,
+        "text": "Servicing suspended",
+        "locator": null
+      },
+      "extracts": []
+    },
+    {
+      "code": "VALIDATION_ERROR",
+      "terminal": true,
+      "detected_by": {
+        "kind": "text_present",
+        "pattern": null,
+        "text": "Invalid member id format",
+        "locator": null
+      },
+      "extracts": []
+    }
+  ],
+  "side_effects": [
+    {
+      "kind": "creates_sub_account",
+      "reversible": false
+    }
+  ],
+  "steps": [
+    {
+      "id": "s1",
+      "action": "navigate",
+      "target": null,
+      "value": null,
+      "url": "http://127.0.0.1:5001/wizard/step-1",
+      "expect": null,
+      "risk": "safe",
+      "notes": "Open the lookup step of the wizard."
+    },
+    {
+      "id": "s2",
+      "action": "type",
+      "target": {
+        "primary": {
+          "by": "label_relative",
+          "anchor": "Member Number",
+          "direction": "next_input"
+        },
+        "fallbacks": [
+          {
+            "by": "css",
+            "selector": "input[name='member']"
+          },
+          {
+            "by": "css",
+            "selector": "#member_field"
+          }
+        ]
+      },
+      "value": "{{member_id}}",
+      "url": null,
+      "expect": null,
+      "risk": "safe",
+      "notes": "Enter member number in the ACME wizard's first field. label_relative works because ACME renders proper <label>."
+    },
+    {
+      "id": "s3",
+      "action": "click",
+      "target": {
+        "primary": {
+          "by": "role_name",
+          "role": "button",
+          "name": "Look up"
+        },
+        "fallbacks": [
+          {
+            "by": "css",
+            "selector": "button[data-role='lookup-submit']"
+          }
+        ]
+      },
+      "value": null,
+      "url": null,
+      "expect": null,
+      "risk": "safe",
+      "notes": "Submit lookup; navigates to step 2."
+    },
+    {
+      "id": "s4",
+      "action": "click",
+      "target": {
+        "primary": {
+          "by": "role_name",
+          "role": "button",
+          "name": "Open Sub-Account"
+        },
+        "fallbacks": [
+          {
+            "by": "css",
+            "selector": "button[data-role='open-subaccount']"
+          }
+        ]
+      },
+      "value": null,
+      "url": null,
+      "expect": null,
+      "risk": "risky",
+      "notes": "Open the sub-account from the wizard's review step. IRREVERSIBLE."
+    }
+  ],
+  "checkpoint": {
+    "kind": "url_pattern",
+    "pattern": "^.*/wizard/step-3/confirm\\?.*id=SA\\d+.*$",
+    "text": null
+  },
+  "recoveries": [],
+  "approval_state": "approved",
+  "approved_by": "chandan",
+  "approved_at": "2026-09-08T05:21:01.115983Z",
+  "provenance": {
+    "goal": "Open a sub-account for ACME member A-1042 (hand-authored, second-vendor demo)",
+    "model": "author-annotated@1",
+    "recorded_at": "2026-09-08T00:00:00Z",
+    "run_id": "authored_acme_v1",
+    "target_url": "http://127.0.0.1:5001"
+  }
+}

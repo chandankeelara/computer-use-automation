@@ -1,0 +1,31 @@
+{
+  "run_id": "replay_acme_bancorp_success",
+  "kind": "replay",
+  "started_at": 1788844875.921787,
+  "artifact": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "acme_bancorp"
+  },
+  "inputs": {
+    "member_id": "A-1042"
+  },
+  "operator_port": null,
+  "ended_at": 1788844876.6211731,
+  "duration_s": 0.699,
+  "result": {
+    "outcome": "SUCCESS",
+    "outputs": {
+      "sub_account_id": "SA50647865"
+    },
+    "error": null,
+    "tier_usage": {
+      "s2": 0,
+      "s3": 0,
+      "s4": 0
+    },
+    "recoveries_applied": [],
+    "resolved_via_handoff": false,
+    "control_transitions": []
+  }
+}

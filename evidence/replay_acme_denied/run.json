@@ -1,0 +1,28 @@
+{
+  "run_id": "replay_acme_denied",
+  "kind": "replay",
+  "started_at": 1788844887.020395,
+  "artifact": {
+    "name": "open_sub_account",
+    "version": "1.0.0",
+    "target": "acme_bancorp"
+  },
+  "inputs": {
+    "member_id": "A-9001"
+  },
+  "operator_port": null,
+  "ended_at": 1788844887.6560752,
+  "duration_s": 0.636,
+  "result": {
+    "outcome": "ACCESS_DENIED",
+    "outputs": null,
+    "error": null,
+    "tier_usage": {
+      "s2": 0,
+      "s3": 0
+    },
+    "recoveries_applied": [],
+    "resolved_via_handoff": false,
+    "control_transitions": []
+  }
+}

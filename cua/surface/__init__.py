@@ -1,4 +1,5 @@
 from .base import Surface
-from .types import Action, Locator, Snapshot, ExecutionResult
+from .guarded import GuardedSurface
+from .types import Action, ExecutionResult, Locator, Snapshot
 
-__all__ = ["Surface", "Action", "Locator", "Snapshot", "ExecutionResult"]
+__all__ = ["Surface", "GuardedSurface", "Action", "Locator", "Snapshot", "ExecutionResult"]

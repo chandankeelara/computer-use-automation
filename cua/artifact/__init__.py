@@ -1,16 +1,23 @@
+from .overlay import OverlayValidationError, apply_overlay
 from .schema import (
     Artifact,
     ArtifactId,
-    Step,
-    LocatorStrategy,
-    Outcome,
+    Checkpoint,
     DetectedBy,
     ExtractSpec,
-    SideEffect,
-    Checkpoint,
+    LocatorStrategy,
+    Outcome,
+    Overlay,
+    OverlayBaseRef,
     Provenance,
+    Recovery,
+    RecoveryTrigger,
+    SideEffect,
+    Step,
+    StepPatch,
+    is_overlay,
 )
-from .store import save_artifact, load_artifact
+from .store import load_artifact, load_document, save_artifact, save_overlay
 
 __all__ = [
     "Artifact",
@@ -22,7 +29,17 @@ __all__ = [
     "ExtractSpec",
     "SideEffect",
     "Checkpoint",
+    "Recovery",
+    "RecoveryTrigger",
+    "Overlay",
+    "OverlayBaseRef",
+    "StepPatch",
+    "OverlayValidationError",
     "Provenance",
-    "save_artifact",
+    "apply_overlay",
+    "is_overlay",
     "load_artifact",
+    "load_document",
+    "save_artifact",
+    "save_overlay",
 ]
